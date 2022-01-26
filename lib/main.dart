@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterconnexion/modules/login.dart';
+import 'package:flutterconnexion/modules/oublier.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(connexion());
 }
 
-class MyApp extends StatelessWidget {
+class connexion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,7 +36,11 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 60,
                 ),
-                Image.asset('assets/logo.png'),
+                Image.asset(
+                  'assets/logo.png',
+                  width: 200,
+                  height: 200,
+                ),
                 SizedBox(
                   height: 40,
                 ),
@@ -121,7 +126,10 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.white54,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => oublier()));
+                    },
                   ),
                 ),
               ],

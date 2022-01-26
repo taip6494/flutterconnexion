@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutterconnexion/modules/login.dart';
 import 'package:flutterconnexion/main.dart';
 
 void main() {
-  runApp(inscription());
+  runApp(oublier());
 }
 
-class inscription extends StatelessWidget {
+class oublier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Page d'inscription",
-      home: Inscription(),
+      title: 'Page de Connexion',
+      home: OublierPage(),
     );
   }
 }
 
-class Inscription extends StatefulWidget {
+class OublierPage extends StatefulWidget {
   @override
-  _Inscription createState() => _Inscription();
+  _OublierPage createState() => _OublierPage();
 }
 
-class _Inscription extends State<Inscription> {
+class _OublierPage extends State<OublierPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +34,10 @@ class _Inscription extends State<Inscription> {
             Column(
               children: [
                 SizedBox(
-                  height: 60,
+                  height: 40,
                 ),
                 Image.asset(
-                  'assets/logo.png',
+                  'assets/inter.png',
                   width: 200,
                   height: 200,
                 ),
@@ -44,7 +45,7 @@ class _Inscription extends State<Inscription> {
                   height: 40,
                 ),
                 Text(
-                  'Inscription',
+                  'Mot de passe oublier ?',
                   style: TextStyle(fontSize: 25, color: Colors.purple),
                 ),
               ],
@@ -52,45 +53,11 @@ class _Inscription extends State<Inscription> {
             //Fin Logo et text
             //Debut Champ de texte
             SizedBox(
-              height: 40.0,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Pseudo",
-                labelStyle: TextStyle(fontSize: 20, color: Colors.purple),
-                filled: true,
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
+              height: 60.0,
             ),
             TextField(
               decoration: InputDecoration(
                 labelText: "Email",
-                labelStyle: TextStyle(fontSize: 20, color: Colors.purple),
-                filled: true,
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            TextField(
-              //Pour cacher le mot de passe
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Mot de passe",
-                labelStyle: TextStyle(fontSize: 20, color: Colors.purple),
-                filled: true,
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            TextField(
-              //Pour cacher le mot de passe
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Retapez votre mot de passe",
                 labelStyle: TextStyle(fontSize: 20, color: Colors.purple),
                 filled: true,
               ),
@@ -103,7 +70,7 @@ class _Inscription extends State<Inscription> {
                 ButtonTheme(
                   child: ElevatedButton(
                     child: Text(
-                      "S'enregistrer",
+                      'Reinitialiser le mot de passe',
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -113,6 +80,26 @@ class _Inscription extends State<Inscription> {
                       primary: Colors.purple, // background (button) color
                       onPrimary: Colors.white,
                     ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                ButtonTheme(
+                  child: TextButton(
+                    child: Text(
+                      'Inscription',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => inscription()));
+                    },
                   ),
                 ),
                 SizedBox(
