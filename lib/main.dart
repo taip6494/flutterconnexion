@@ -29,13 +29,13 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.purple[200],
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          children: [
-            //partie Logo et Text
-            Form(
-              key: _formkey,
-              child: Column(
+        child: Form(
+          key: _formkey,
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            children: [
+              //partie Logo et Text
+              Column(
                 children: [
                   SizedBox(
                     height: 60,
@@ -54,110 +54,111 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-            ),
-            //Fin Logo et text
-            //Debut Champ de texte
-            SizedBox(
-              height: 60.0,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: "Adresse mail",
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.purple)),
-              validator: (value) {
-                if (value!.isEmpty ||
-                    !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                        .hasMatch(value)) {
-                  return "Entrer une adresse mail correct";
-                } else {
-                  return null;
-                }
-              },
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                  labelText: "Votre mot de passe",
-                  labelStyle: TextStyle(fontSize: 20, color: Colors.purple)),
-              validator: (value) {
-                if (value!.isEmpty ||
-                    !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                        .hasMatch(value)) {
-                  return 'Entrer un mot de passe avec des caractéres spéciaux majuscule et nombres';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Column(
-              children: [
-                ButtonTheme(
-                  child: ElevatedButton(
-                    child: Text(
-                      'Connexion',
-                      style: TextStyle(
-                        fontSize: 20,
+
+              //Fin Logo et text
+              //Debut Champ de texte
+              SizedBox(
+                height: 60.0,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: "Adresse mail",
+                    labelStyle: TextStyle(fontSize: 20, color: Colors.purple)),
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                          .hasMatch(value)) {
+                    return "Entrer une adresse mail correct";
+                  } else {
+                    return null;
+                  }
+                },
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    labelText: "Votre mot de passe",
+                    labelStyle: TextStyle(fontSize: 20, color: Colors.purple)),
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                          .hasMatch(value)) {
+                    return 'Entrer un mot de passe avec des caractéres spéciaux majuscule et nombres';
+                  } else {
+                    return null;
+                  }
+                },
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Column(
+                children: [
+                  ButtonTheme(
+                    child: ElevatedButton(
+                      child: Text(
+                        'Connexion',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      onPressed: () {
+                        if (_formkey.currentState!.validate()) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => MyApp()));
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.purple, // background (button) color
+                        onPrimary: Colors.white,
                       ),
                     ),
-                    onPressed: () {
-                      if (_formkey.currentState!.validate()) {
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  ButtonTheme(
+                    child: TextButton(
+                      child: Text(
+                        'Inscription',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => inscription()));
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  ButtonTheme(
+                    child: TextButton(
+                      child: Text(
+                        'Mot de passe oublié ?',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white54,
+                        ),
+                      ),
+                      onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyApp()));
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.purple, // background (button) color
-                      onPrimary: Colors.white,
+                            MaterialPageRoute(builder: (context) => oublier()));
+                      },
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                ButtonTheme(
-                  child: TextButton(
-                    child: Text(
-                      'Inscription',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => inscription()));
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                ButtonTheme(
-                  child: TextButton(
-                    child: Text(
-                      'Mot de passe oublié ?',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white54,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => oublier()));
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
