@@ -81,7 +81,7 @@ class _Inscription extends State<Inscription> {
                   if (value!.isEmpty ||
                       !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                           .hasMatch(value)) {
-                    return "Enter Correct Email Address";
+                    return "Entrer une adresse mail correct";
                   } else {
                     return null;
                   }

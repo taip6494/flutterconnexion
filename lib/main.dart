@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterconnexion/modules/login.dart';
 import 'package:flutterconnexion/modules/oublier.dart';
+import 'package:flutterconnexion/modules/acceuil.dart';
 
 void main() {
   runApp(connexion());
@@ -22,6 +23,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,48 +33,64 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           children: [
             //partie Logo et Text
-            Column(
-              children: [
-                SizedBox(
-                  height: 60,
-                ),
-                Image.asset(
-                  'assets/logo.png',
-                  width: 200,
-                  height: 200,
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  'Connexion',
-                  style: TextStyle(fontSize: 25, color: Colors.purple),
-                ),
-              ],
+            Form(
+              key: _formkey,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Image.asset(
+                    'assets/logo.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Text(
+                    'Connexion',
+                    style: TextStyle(fontSize: 25, color: Colors.purple),
+                  ),
+                ],
+              ),
             ),
             //Fin Logo et text
             //Debut Champ de texte
             SizedBox(
               height: 60.0,
             ),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
-                labelText: "Email",
-                labelStyle: TextStyle(fontSize: 20, color: Colors.purple),
-                filled: true,
-              ),
+                  labelText: "Adresse mail",
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.purple)),
+              validator: (value) {
+                if (value!.isEmpty ||
+                    !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                        .hasMatch(value)) {
+                  return "Entrer une adresse mail correct";
+                } else {
+                  return null;
+                }
+              },
             ),
             SizedBox(
               height: 20.0,
             ),
-            TextField(
-              //Pour cacher le mot de passe
+            TextFormField(
               obscureText: true,
               decoration: InputDecoration(
-                labelText: "Mot de passe",
-                labelStyle: TextStyle(fontSize: 20, color: Colors.purple),
-                filled: true,
-              ),
+                  labelText: "Votre mot de passe",
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.purple)),
+              validator: (value) {
+                if (value!.isEmpty ||
+                    !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                        .hasMatch(value)) {
+                  return 'Entrer un mot de passe avec des caractéres spéciaux majuscule et nombres';
+                } else {
+                  return null;
+                }
+              },
             ),
             SizedBox(
               height: 20.0,
@@ -87,7 +105,12 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 20,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formkey.currentState!.validate()) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MyApp()));
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.purple, // background (button) color
                       onPrimary: Colors.white,
